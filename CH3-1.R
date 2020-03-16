@@ -17,7 +17,7 @@ c<-cast(aqm, month~.|variable,mean)#variable별로 따로 표시
 c
 d<-cast(aqm,month~variable, mean, margins=c("grand_row","grand_col"))#각 행과 열에 대해 소계 산출
 d
-e <- cast(aqm, day~month,mean,subset=variable=="ozone")#특정 변수(onzone)만 처리
+e <- cast(aqm, day~month,mean,subset=variable=="ozone")#특정 변수(ozone)만 처리
 e        
 objects()
 
