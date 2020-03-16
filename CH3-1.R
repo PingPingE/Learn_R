@@ -34,14 +34,19 @@ d <- data.frame(year = rep(2012:2014, each=6), count=round(runif(9,0,20)))
 #year: 2012년부터 2014년까지 각각 6개씩
 #count: runif로 0~20사이의 난수 20개 생성 후 반올림하여 정수화(round)
 
-library(plyr)
+#-----plyr-------------
+library(plyr)#d: data.frame, a: array, l: list -> 이 중 두개의 문자를 접두사로 가지는데 첫번째 문자는 input형태, 두번째는 output형태 
+
+#input: dataframe -> function 적용 -> output: dataframe (결과는 "year"을 기준으로 리턴) 
 ddply(d,"year",function(x){
   cv = sd(x$count)/mean(x$count)#변동계수
   data.frame(cv.count=cv)
 })
+
 ddply(d,"year",summarise, mean.count=mean(count))#count컬럼은 사라지는 거임
 ddply(d,"year", transform, total.count= mean(count))#아예 새로운 컬럼 추가
 
+#-----data.table--------------------
 install.packages("data.table")
 library(data.table)
 DT = data.table(x=c("b","b","b","a","a"), v= rnorm(5))
@@ -85,6 +90,7 @@ ss<-system.time(ans2<-DT[J("R","h")])#index를 활용한 binary search를 수행
 ss
 head(ans2,3)
 
+#---------------------------------------------------
 DT[,sum(v)]#v열 sum
 DT[,sum(v), by=x]#x(알파벳)별로(grouping) v값들의 sum계산
 DT[,sum(v), by="x,y"]#x,y별로(grouping) v값들의 sum계산
@@ -93,6 +99,8 @@ str(DT)#파이썬의 infor()과 비슷(데이터 구조 파악)
 summary(DT)
 cov(DT)
 
+
+#---------결측값 처리------------------
 data_1 = c(1,2,NA,5,6,6,7,2,45,34)
 data_1[data_1==1]<-NA #결측값으로 바꾸고 싶은값 
 data_1
@@ -101,7 +109,7 @@ data_1
 data_1[complete.cases(data_1)]#실제로 반영되진 않음(inplace=False)
 data_1
 
-#---------결측값 처리------------------
+
 install.packages('Amelia')
 library(Amelia)
 data(freetrade)
@@ -128,12 +136,12 @@ x=rnorm(100)
 boxplot(x)
 x=c(x,19,28,30)#이상값 3개 추가
 
-#boxplot으로 직접 확인
+#1. boxplot으로 직접 확인
 outwith = boxplot(x)
 outwith$out#이상값 프린트
 
 
-#outliers 패키지로 확인: 평균과 가장 큰 차이가 있는 값을 알려줌
+#2. outliers 패키지로 확인: 평균과 가장 큰 차이가 있는 값을 알려줌
 install.packages('outliers')
 library(outliers)
 outlier(x)
