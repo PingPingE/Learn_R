@@ -6,7 +6,7 @@
  library(rvest)
  library(tidyverse)
 
- #로그인 페이지
+ #로그인 페이지 url
  login <- 'https://www.jobplanet.co.kr/users/sign_in'
  
  # 로그인 정보를 입력하고 HTTP 요청 
@@ -14,7 +14,7 @@
               body = list('user[email]' = '',
                           'user[password]' = ''))
  
- # 응답 상태코드를 확인합니다. 200이면 정상입니다.
+ # 응답 상태코드를 확인합니다. 200이면 정상
  status_code(x = resp)
 
  #크롤링을 원하는 회사명 입력
@@ -88,7 +88,7 @@ result <- getData(x = resp)
 #모든 페이지 크롤링
 for(i in 2:pages)
 {
-  uri=paste0('원하는 기업의 잡플래닛 url page='
+  uri=paste0(uri,'?page='
              ,toString(i),'&review_type=')
   resp <- GET(url = uri)
   tmp<-getData(x=resp)
