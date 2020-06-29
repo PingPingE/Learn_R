@@ -3,4 +3,5 @@
 <ul>
   <li>데이터 분석 전문가 가이드(한국데이터산업진흥원)
   <li>https://mrkevinna.github.io/%ED%8A%B9%EA%B0%95-%EA%B8%B0%EC%97%85%EB%A6%AC%EB%B7%B0-%EB%B6%84%EC%84%9D-1/
+<li>https://suritam9.pe.kr/index.php?mid=imp&document_srl=2890
 </ul>
